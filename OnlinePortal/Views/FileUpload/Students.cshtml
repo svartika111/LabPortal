@@ -1,0 +1,143 @@
+﻿@model IEnumerable<OnlinePortal.Models.Candidate>
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>StudentRecords</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script src="~/scripts/GetData.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript">
+    </script>
+    <style type="text/css">
+
+        body {
+            font-family: Arial;
+            font-size: 12pt;
+        }
+
+
+
+        .Text {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 50px;
+            font-size: 50px;
+            text-decoration-color: #000000;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .error {
+            color: red;
+        }
+
+
+        .zui-table {
+            border: solid 1px #DDEEEE;
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin-left: 20px;
+            margin-right: 500px;
+            width: 100%;
+            font: normal 13px Arial, sans-serif;
+        }
+
+            .zui-table thead th {
+                background-color: #DDEFEF;
+                border: solid 1px #DDEEEE;
+                color: #336B6B;
+                padding: 10px;
+                text-align: left;
+            }
+
+            .zui-table tbody td {
+                border: solid 1px #DDEEEE;
+                color: #333;
+                padding: 10px;
+            }
+
+        .zui-table-rounded {
+            border: none;
+        }
+
+            .zui-table-rounded thead th {
+                background-color: #81D4FA;
+                border: none;
+                color: #333;
+            }
+
+                .zui-table-rounded thead th:first-child {
+                    border-radius: 10px 0 0 0;
+                }
+
+                .zui-table-rounded thead th:last-child {
+                    border-radius: 0 10px 0 0;
+                }
+
+            .zui-table-rounded tbody td {
+                border: none;
+                border-top: solid 1px #B3E5FC;
+                background-color: #B3E5FC;
+            }
+
+            .zui-table-rounded tbody tr:last-child td:first-child {
+                border-radius: 0 0 0 10px;
+            }
+
+            .zui-table-rounded tbody tr:last-child td:last-child {
+                border-radius: 0 0 10px 0;
+            }
+    </style>
+    <script>
+    function myclicktest(file) {
+    if (file !=" ")
+    {
+
+    window.location.href = "@Url.RouteUrl(new { Controller = "StudentRecord", Action = "Download" })/?file=" + file;
+
+    }
+
+    }
+    </script>
+</head>
+<body>
+    <div class="Text">
+        <text>YOUR ALL SUBMITTED RECORDS !!</text>
+    </div>
+    <hr />
+    <table  id="blogTable" class="zui-table zui-table-rounded">
+        <thead>
+            <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>EmailID</th>
+                <th>File</th>
+                <th>Submitting Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (OnlinePortal.Models.Candidate cseuser in Model)
+            {
+                <tr>
+                    <td>@cseuser.FirstName</td>
+                    <td>@cseuser.LastName</td>
+                    <td>@cseuser.EmailID</td>
+                    <td><a href="javascript:myclicktest( @cseuser.Resume );" >Lab File</a></td>
+                    <td>@cseuser.CreatedOn</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "profrecord";
+}
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#CategoryList").change(function () {
+           
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetBlogDetailByCategoryID")",
+                data: { Prof_Id: $("#CategoryList").val() },
+                dataType: "json",
+                asyn: false,
+
+                success: function (data) {
+                    $('#blogTable table').empty();
+                    $('#blogTable thead').empty();
+                  
+                    
+                    if (data.result.length == 0) {
+
+                        $('#blogTable table').empty();
+                        $('#blogTable thead').empty();
+
+                        alert('There is no record of students available for this professor!');
+                    }
+
+                    else {
+                        $('thead').append('<tr><th> FirstName </th><th> LastName </th><th> EmailID </th><th> File </th></tr>');
+                        $.each(data.result, function (i, item) {
+                          
+                            var rows = "<tr>"
+                                + "<td>" + item.FirstName + "</td>"
+                                + "<td>" + item.LastName + "</td>"
+
+                                + "<td>" + item.EmailID + "</td>"
+                                + "<td><input type = 'button' id = " + item.EmailID + " value = 'Lab File' /></td>"
+                          
+                                + "</tr>";
+                           
+                            $('#blogTable tbody').append(rows);
+                              if (item.Resume != " ")
+                               {
+
+                                window.location.href = "@Url.RouteUrl(new { Controller = "StudentRecord", Action = "Download"})/?file=" + item.Resume;
+
+                               }
+                             
+                        });
+
+                    }
+                   },
+                error: function (ex) {
+                    console.error(ex);
+                }
+            });
+        });
+    });
+   
+    function myclicktest(file) {
+        if (file !=" ")
+        {
+
+            window.location.href = "@Url.RouteUrl(new { Controller = "StudentRecord", Action = "Download"})/?file=" + file;
+
+        }
+
+    }
+ 
+    
+</script>
+<style type="text/css">
+    .zui-table {
+        border: solid 1px #DDEEEE;
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        font: normal 13px Arial, sans-serif;
+    }
+
+        .zui-table thead th {
+            background-color: #DDEFEF;
+            border: solid 1px #DDEEEE;
+            color: #336B6B;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .zui-table tbody td {
+            border: solid 1px #DDEEEE;
+            color: #333;
+            padding: 10px;
+        }
+
+    .zui-table-rounded {
+        border: none;
+    }
+
+        .zui-table-rounded thead th {
+            background-color: #81D4FA;
+            border: none;
+            color: #333;
+        }
+
+            .zui-table-rounded thead th:first-child {
+                border-radius: 10px 0 0 0;
+            }
+
+            .zui-table-rounded thead th:last-child {
+                border-radius: 0 10px 0 0;
+            }
+
+        .zui-table-rounded tbody td {
+            border: none;
+            border-top: solid 1px #B3E5FC;
+            background-color: #B3E5FC;
+        }
+
+        .zui-table-rounded tbody tr:last-child td:first-child {
+            border-radius: 0 0 0 10px;
+        }
+
+        .zui-table-rounded tbody tr:last-child td:last-child {
+            border-radius: 0 0 10px 0;
+        }
+</style>
+<table>
+    <tr>
+        <td>
+            <h2> Get Details Of Your Students By Selecting Your Name!</h2>
+            <br />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Select Name : @Html.DropDownList("CategoryList")
+        </td>
+    </tr>
+</table>
+<br />
+<table id="blogTable" class="zui-table zui-table-rounded">
+    <thead>
+    </thead>
+    <tbody></tbody>
+</table>
+
+

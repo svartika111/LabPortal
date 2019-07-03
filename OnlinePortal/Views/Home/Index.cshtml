@@ -1,0 +1,141 @@
+﻿@model OnlinePortal.Models.PortralUser
+
+@{
+    Layout = null;
+}
+@*<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>*@
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+            background-color: #009688;
+         
+        }
+
+        table {
+            border: 5px solid #ccc;
+            border-collapse: collapse;
+            margin-top: 100px;
+          
+            border-color: #009688;
+        }
+
+            table th {
+                background-color: #e0f2f1;
+               
+                color: #333;
+                font-weight: bold;
+            }
+
+            table th, table td {
+                padding: 10px;
+                padding-top: 20px;
+                border: 1px solid #ccc;
+              
+                background-color: #e0f2f1;
+            }
+
+        .error {
+            color: red;
+        }
+        .Text
+        {
+             text-align:center;
+             margin-top:10px;
+             
+             font-size:50px;
+             text-decoration-color:#000000;
+             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+        }
+    </style>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script src="~/scripts/GetData.js"></script>
+</head>
+<body style="background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)">
+    <div class="Text">
+    <text >
+        Welcome To Lab Portal !
+
+    </text>
+        </div>
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <table border="1" cellpadding="50" cellspacing="50" align="center">
+            <tr>
+                <th colspan="7">
+                    Registration
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    Username
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Username)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(m => m.Username, "", new { @class = "error" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Password
+                </td>
+                <td>
+                    @Html.PasswordFor(m => m.Password)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Email
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Email)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "error" })
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+
+                    <input type="submit" value="Submit" />
+
+                </td>
+                <td>
+                    <input type="submit" value="Next" onclick="location.href='@Url.Action("LoginStudent", "Login")'" />
+                </td>
+            </tr>
+        </table>
+    }
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (@ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            $(function () {
+                alert("@ViewBag.Message")
+            });
+        </script>
+    }
+</body>
+</html>

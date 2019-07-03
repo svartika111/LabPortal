@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bower_components/morris.js/morris.css">
+</head>
+<body>
+    
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink( "Index", "StudentRecord", null, new { @class = "navbar-brand" })
+            </div>
+        </div>
+   
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+           
+        </footer>
+    </div>
+    <div class="loaderbody" id="loaderbody">
+        <div class="loader"></div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/Scripts.js"></script>
+    <script src="~/Scripts/notify.min.js"></script>
+</body>
+</html>

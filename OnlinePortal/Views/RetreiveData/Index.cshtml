@@ -1,0 +1,31 @@
+﻿
+@model List<SelectListItem>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @using (Html.BeginForm("Index", "RetreiveData", FormMethod.Post))
+    {
+        @Html.DropDownList("ddlCustomers", Model)
+        <br />
+        <br />
+        <input type="submit" value="Submit" />
+    }
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+</body>
+</html>

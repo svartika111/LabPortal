@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FacultyDBModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Candidates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="200" />
+          <Property Name="EmailID" Type="nvarchar" MaxLength="200" />
+          <Property Name="Resume" Type="nvarchar" MaxLength="300" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="Prof_Id" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Prof_Details">
+          <Key>
+            <PropertyRef Name="Prof_ID" />
+          </Key>
+          <Property Name="Prof_ID" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="Prof_Name" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <Association Name="FK__Candidate__Prof___5FB337D6">
+          <End Role="Prof_Details" Type="Self.Prof_Details" Multiplicity="0..1" />
+          <End Role="Candidates" Type="Self.Candidates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prof_Details">
+              <PropertyRef Name="Prof_ID" />
+            </Principal>
+            <Dependent Role="Candidates">
+              <PropertyRef Name="Prof_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FacultyDBModel1StoreContainer">
+          <EntitySet Name="Candidates" EntityType="Self.Candidates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prof_Details" EntityType="Self.Prof_Details" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Candidate__Prof___5FB337D6" Association="Self.FK__Candidate__Prof___5FB337D6">
+            <End Role="Prof_Details" EntitySet="Prof_Details" />
+            <End Role="Candidates" EntitySet="Candidates" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FacultyDBModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FacultyDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Candidates" EntityType="FacultyDBModel1.Candidate" />
+          <EntitySet Name="Prof_Details" EntityType="FacultyDBModel1.Prof_Details" />
+          <AssociationSet Name="FK__Candidate__Prof___5FB337D6" Association="FacultyDBModel1.FK__Candidate__Prof___5FB337D6">
+            <End Role="Prof_Details" EntitySet="Prof_Details" />
+            <End Role="Candidate" EntitySet="Candidates" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Candidate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EmailID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Resume" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="Prof_Id" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Prof_Details" Relationship="FacultyDBModel1.FK__Candidate__Prof___5FB337D6" FromRole="Candidate" ToRole="Prof_Details" />
+        </EntityType>
+        <EntityType Name="Prof_Details">
+          <Key>
+            <PropertyRef Name="Prof_ID" />
+          </Key>
+          <Property Name="Prof_ID" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Prof_Name" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Candidates" Relationship="FacultyDBModel1.FK__Candidate__Prof___5FB337D6" FromRole="Prof_Details" ToRole="Candidate" />
+        </EntityType>
+        <Association Name="FK__Candidate__Prof___5FB337D6">
+          <End Type="FacultyDBModel1.Prof_Details" Role="Prof_Details" Multiplicity="0..1" />
+          <End Type="FacultyDBModel1.Candidate" Role="Candidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prof_Details">
+              <PropertyRef Name="Prof_ID" />
+            </Principal>
+            <Dependent Role="Candidate">
+              <PropertyRef Name="Prof_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FacultyDBModel1StoreContainer" CdmEntityContainer="FacultyDBEntities1">
+          <EntitySetMapping Name="Candidates">
+            <EntityTypeMapping TypeName="FacultyDBModel1.Candidate">
+              <MappingFragment StoreEntitySet="Candidates">
+                <ScalarProperty Name="Prof_Id" ColumnName="Prof_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Resume" ColumnName="Resume" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prof_Details">
+            <EntityTypeMapping TypeName="FacultyDBModel1.Prof_Details">
+              <MappingFragment StoreEntitySet="Prof_Details">
+                <ScalarProperty Name="Prof_Name" ColumnName="Prof_Name" />
+                <ScalarProperty Name="Prof_ID" ColumnName="Prof_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,93 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        .css_btn_class {
+            font-size: 22px;
+            font-family: Arial Black;
+            font-weight: normal;
+            -moz-border-radius: 42px;
+            -webkit-border-radius: 42px;
+            border-radius: 42px;
+            border: 5px solid #82b9f0;
+            padding: 8px 19px;
+            text-decoration: none;
+            background: -webkit-gradient( linear, left top, left bottom, color-stop(5%, #8abbeb), color-stop(100%, #2f88e0) );
+            background: -moz-linear-gradient( center top, #8abbeb 5%, #2f88e0 100% );
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8abbeb', endColorstr='#2f88e0');
+            background-color: #8abbeb;
+            color: #ffffff;
+            display: inline-block;
+        }
+
+        .split {
+            height: 100%;
+            width: 50%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        /* Control the left side */
+        .left {
+            left: 0;
+            background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)
+        }
+
+        /* Control the right side */
+        .right {
+            right: 0;
+            background-color: #ffffff;
+        }
+
+        /* If you want the content centered horizontally and vertically */
+        .centered {
+            position: relative;
+            top: 30%;
+            left: 50%;
+            font-size: 22px;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+            /* Style the image inside the centered container, if needed */
+            .centered img {
+                width: 150px;
+                border-radius: 50%;
+            }
+    </style>
+</head>
+<body style="background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)">
+
+
+
+
+    <div class="split left">
+        <div class="centered">
+            <h2>Please Select The Category Of Data Which Needs To Be Monitored !!!</h2>
+        </div>
+    </div>
+
+    <div class="split right">
+        <div class="centered">
+            <h2>Which Database You Need!</h2>
+     
+            <input type="submit" value="Professor" onclick="location.href='@Url.Action("Index", "AdminRecord")'" class="css_btn_class" />
+            <input type="submit" value="Student" onclick="location.href='@Url.Action("Index", "StudentRecord")'" class="css_btn_class" />
+
+        </div>
+    </div>
+</body>
+</html>
+
